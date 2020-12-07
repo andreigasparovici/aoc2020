@@ -6,20 +6,17 @@ char line[1000];
 void part1() {
 	int ans = 0;
 
-	do {
+	while (!feof(stdin)) {
+		fgets(line, 1000, stdin);
+
 		unordered_set<char> answers;
 
-		do {
-			fgets(line, 1000, stdin);
-
+		for (; *line != '\n'; fgets(line, 1000, stdin))
 			for (char *p = line; *p && *p != '\n'; p++)
 				answers.insert(*p);
 
-		} while (*line != '\n');
-
 		ans += answers.size();
-
-	} while(!feof(stdin));
+	}
 
 	printf("%d\n", ans);
 }
@@ -53,7 +50,6 @@ int main() {
 	freopen("day6.in", "r", stdin);
 
 	part1();
-
 	part2();
 
 	return 0;
