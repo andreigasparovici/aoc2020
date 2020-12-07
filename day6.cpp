@@ -1,0 +1,60 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+char line[1000];
+
+void part1() {
+	int ans = 0;
+
+	do {
+		unordered_set<char> answers;
+
+		do {
+			fgets(line, 1000, stdin);
+
+			for (char *p = line; *p && *p != '\n'; p++)
+				answers.insert(*p);
+
+		} while (*line != '\n');
+
+		ans += answers.size();
+
+	} while(!feof(stdin));
+
+	printf("%d\n", ans);
+}
+
+void part2() {
+	fseek(stdin, 0, SEEK_SET);
+	
+	int ans = 0;
+
+	while (!feof(stdin)) {
+		unordered_map<char, int> answers;
+
+		int people;
+
+		fgets(line, 1000, stdin);
+
+		for (people = 0; *line != '\n'; ++people) {
+			for (char *p = line; *p && *p != '\n'; p++)
+				++answers[*p];
+
+			fgets(line, 1000, stdin);
+		}
+
+		ans += count_if(answers.begin(), answers.end(), [&](pair<char, int> it) { return it.second == people; });
+	}
+
+	printf("%d\n", ans);
+}
+
+int main() {
+	freopen("day6.in", "r", stdin);
+
+	part1();
+
+	part2();
+
+	return 0;
+}
