@@ -49,53 +49,45 @@ void read() {
 	}
 }
 
-void dfs1(const string& node, unordered_map<string, bool>& used, bool& ok) {
-	used[node] = true;
-
+void dfs1(const string& node, bool& found) {
 	if (node == "shiny gold") {
-		ok = true;
+		found = true;
 		return;
 	}
 
 	for (auto next: graph[node]) {
-		if (!used[next.first])
-			dfs1(next.first, used, ok);
-		if (ok) return;
+		dfs1(next.first, found);
+		if (found) return;
 	}
 }
 
 void part1() {
-	unordered_map<string, bool> used;
 	int ans = 0;
 
 	for (auto node: graph) {
 		if (node.first == "shiny gold") continue;
 
-		bool ok = false;
-		used.clear();
+		bool found = false;
 
-		dfs1(node.first, used, ok);
+		dfs1(node.first, found);
 
-		if (ok) ++ans;
+		if (found) ++ans;
 	}
 
 	printf("%d\n", ans);
 }
 
-void dfs2(const string& node, unordered_map<string, bool>& used, unordered_map<string, int>& count, int coef=1) {
-	used[node] = true;
-	
+void dfs2(const string& node, unordered_map<string, int>& count, int coef=1) {
 	for (auto next: graph[node]) {
 		count[node] += coef * next.second;
-		dfs2(next.first, used, count, coef * next.second);
+		dfs2(next.first, count, coef * next.second);
 	}
 }
 
 void part2() {
-	unordered_map<string, bool> used;
 	unordered_map<string, int> count;
 
-	dfs2("shiny gold", used, count);
+	dfs2("shiny gold", count);
 
 	int ans = 0;
 	for_each(count.begin(), count.end(), [&ans](const pair<string, int>& it) { ans += it.second; });
