@@ -8,53 +8,42 @@ void read() {
 	turns.clear();
 
 	int num;
-	while (scanf("%d,", &num) == 1) {
+	while (scanf("%d,", &num) == 1)
 		turns.push_back(num);
-	}
 }
 
-int generateTurns(vector<int>& init, int turns) {
-	int currentTurn = 0;
-	multimap<int, int> turn;
+int nthTurn(vector<int>& init, int n) {
+	// Bound based on the growth of The Van Eck Sequence (almost linear)
+	static list<int> turn[30000000]{};
+	for (int i = 0; i < 30000000; i++)
+		turn[i].clear();
+
+	int i = 0;
 
 	int lastSpoken;
 
 	for (auto num: init) {
-		turn.insert({num, ++currentTurn});
+		turn[num].push_back(++i);
 		lastSpoken = num;
 	}
 
-	for (++currentTurn; currentTurn <= turns; ++currentTurn) {
-		if (currentTurn % 100000 == 0) {
-			printf("\r%4.2f%%", 1. * currentTurn / turns * 100);
-			fflush(stdout);
-		}
-
+	for (++i; i <= n; ++i) {
 		int nextSpoken;
 
-		int count = turn.count(lastSpoken);
-		auto range = turn.equal_range(lastSpoken);
+		auto& indices = turn[lastSpoken];
+		if (indices.size() > 2)
+			indices.pop_front();
 
-		if (count > 2) {
-			turn.erase(range.first, prev(range.second, 3));
-			count = 2;
-		}
-
-		// If first time
-		if (count == 1) {
+		if (indices.size() == 1) {
 			nextSpoken = 0;
 		} else {
-			// Not first time => get last turn
-			int lastTurn = prev(range.second)->second;
-			int secondLastTurn = prev(range.second, 2)->second;
-			nextSpoken = lastTurn - secondLastTurn;
+			auto last = prev(indices.end());
+			nextSpoken = *last - *prev(last);
 		}
 
-		turn.insert({nextSpoken, currentTurn});
+		turn[nextSpoken].push_back(i);
 		lastSpoken = nextSpoken;
 	}
-
-	printf("\r%20c\r", ' ');
 
 	return lastSpoken;
 }
@@ -62,21 +51,22 @@ int generateTurns(vector<int>& init, int turns) {
 void part1() {
 	read();
 
-	printf("%d\n", generateTurns(turns, 2020));
+	printf("%d\n", nthTurn(turns, 2020));
+	fflush(stdout);
 }
 
 void part2() {
 	read();
 
-	printf("%d\n", generateTurns(turns, 30000000));
+	printf("%d\n", nthTurn(turns, 30000000));
+	fflush(stdout);
 }
 
 int main() {
 	freopen("day15.in", "r", stdin);
 
-	//part1();
+	part1();
 	part2();
-
 
 	return 0;
 }
