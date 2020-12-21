@@ -22,6 +22,7 @@
 | 18 | [Statement](https://adventofcode.com/2020/day/18) | [Solution](day18.cpp) |
 | 19 | [Statement](https://adventofcode.com/2020/day/19) | [Solution](day19.cpp) |
 | 20 | [Statement](https://adventofcode.com/2020/day/20) | [Solution](day20.cpp) |
+| 21 | [Statement](https://adventofcode.com/2020/day/21) | [Solution](day21.cpp) |
 
 
 For day `n`, the input is provided as day`n`.in
