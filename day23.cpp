@@ -61,10 +61,7 @@ void epoch(int S, int max_val) {
 	insert_after(dest, picked);
 }
 
-//vector<int> state{3, 8, 9, 1, 2, 5, 4, 6, 7};
-vector<int> state{3, 6, 8, 1, 9, 5, 7, 4, 2};
-
-void part1() {
+void part1(const array<int, 9>& state) {
 	H = -1;
 
 	for_each(state.begin(), state.end(), push_back);
@@ -72,7 +69,7 @@ void part1() {
 	int c = state[0];
 
 	for (int i = 1; i <= 100; i++) {
-		epoch(c, 9);
+		epoch(c, state.size());
 		c = N[c];
 	}
 
@@ -83,9 +80,7 @@ void part1() {
 	cout << endl;
 }
 
-void part2() {
-	fill(N, N + NMAX + 1, 0);
-	fill(P, P + NMAX + 1, 0);
+void part2(const array<int, 9>& state) {
 	H = -1;
 
 	for_each(state.begin(), state.end(), push_back);
@@ -104,6 +99,7 @@ void part2() {
 }
 
 int main() {
-	part1();
-	part2();
+	const array<int, 9> state{3, 6, 8, 1, 9, 5, 7, 4, 2};
+	part1(state);
+	part2(state);
 }
