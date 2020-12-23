@@ -24,6 +24,7 @@
 | 20 | [Jurassic Jigsaw](https://adventofcode.com/2020/day/20) | [Solution](day20.cpp) |
 | 21 | [Allergen Assessment](https://adventofcode.com/2020/day/21) | [Solution](day21.cpp) |
 | 22 | [Crab Combat](https://adventofcode.com/2020/day/22) | [Solution](day22.cpp) |
+| 23 | [Crab Cups](https://adventofcode.com/2020/day/23) | [Solution](day23.cpp) |
 
 
 For day `n`, the input is provided as day`n`.in
