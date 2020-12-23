@@ -11,7 +11,7 @@ void push_back(int x) {
 		P[x] = N[x] = x;
 		return;
 	}
-	
+
 	if (H == N[H]) {
 		N[x] = H;
 		P[x] = H;
@@ -71,10 +71,10 @@ void part1() {
 
 	int c = state[0];
 
-    for (int i = 1; i <= 100; i++) {
+	for (int i = 1; i <= 100; i++) {
 		epoch(c, 9);
-        c = N[c];
-    }
+		c = N[c];
+	}
 
 	int s = 1;
 
@@ -95,10 +95,10 @@ void part2() {
 
 	int c = state[0];
 
-    for (int i = 1; i <= 10 * NMAX; i++) {
+	for (int i = 1; i <= 10 * NMAX; i++) {
 		epoch(c, NMAX);
-        c = N[c];
-    }
+		c = N[c];
+	}
 
 	cout << 1LL * N[1] * N[N[1]] << endl;
 }
