@@ -26,6 +26,7 @@
 | 22 | [Crab Combat](https://adventofcode.com/2020/day/22) | [Solution](day22.cpp) |
 | 23 | [Crab Cups](https://adventofcode.com/2020/day/23) | [Solution](day23.cpp) |
 | 24 | [Lobby Layout](https://adventofcode.com/2020/day/24) | [Solution](day24.cpp) |
+| 25 | [Combo Breaker](https://adventofcode.com/2020/day/25) | [Solution](day25.cpp) |
 
 
 For day `n`, the input is provided as day`n`.in
